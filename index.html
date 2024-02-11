@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+</head>
+
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>We have selected a random number between 1 and 10. Can you guess what it is?</p>
+    <input type="text" id="input" />
+    <button onclick="guessing()">Submit Guess</button>
+
+
+
+
+    <script>
+        function guessing() {
+            const input = document.getElementById("input").value;
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "input=" + input
+            })
+            .then(response => response.json())
+            .then(data => {
+                
+                
+                console.log(data.result);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    </script>
+    
+
+
+</body>
+
+</html>
